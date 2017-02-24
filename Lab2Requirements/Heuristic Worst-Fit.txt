@@ -1,22 +1,41 @@
-1GB Disk (1,000,000KB)
-
-Store Files on Disks
--IF(fileSize fits){place in Disk}
--IF(fileSize too big){create new Disk}
-
+Java Files Needed
+-WorstFit.java
+-IntegerSorter.java
+-Disk.java
+***Provided by Princeton***
+-MaxPQ.java
+-StdIn.java
+	
+Storing Files on Disks
 ***Process Biggest files first!!***
+-1GB Disk (1,000,000KB)
+-IF(fileSize fits){place in Disk}
+-IF(fileSize too big){create and place in new Disk}
+-Needs to "implement the Comaparable<Disk> interface" for use with MaxPQ
+
+Sorting Algorithm
 -Need a sorting algorithm for ints
--Needs to be fast to sort high volume
+	*IntegerSorter.java
+-Needs to be fast to sort high volume (10,000-100,000ints)
+	*QuickSort?
+
+Priority Que
+-Used to store Disks by available space
+-Aids in printing out results of disks
+*MaxPQ.java
 
 Input
+-N = 100 up to 100,000
 -read in set of file sizes
 -Standard input
+*StdIn.java
 
-Output ***See Picture of output online***
+Output
+***See Picture of output online***
 -Output number of disks used
 -sum of all file sizes divided by 1 million
 -IF(number of files < 100){print out disks in decreasing order of unused space}
--For each disk, print out:
+-Else{each disk, print out}:
 	*remaining space
 	*Contents (in order files were inserted)
 	*Unique ID optional for disks
