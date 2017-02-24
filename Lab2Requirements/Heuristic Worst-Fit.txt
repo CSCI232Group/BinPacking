@@ -1,0 +1,22 @@
+1GB Disk (1,000,000KB)
+
+Store Files on Disks
+-IF(fileSize fits){place in Disk}
+-IF(fileSize too big){create new Disk}
+
+***Process Biggest files first!!***
+-Need a sorting algorithm for ints
+-Needs to be fast to sort high volume
+
+Input
+-read in set of file sizes
+-Standard input
+
+Output ***See Picture of output online***
+-Output number of disks used
+-sum of all file sizes divided by 1 million
+-IF(number of files < 100){print out disks in decreasing order of unused space}
+-For each disk, print out:
+	*remaining space
+	*Contents (in order files were inserted)
+	*Unique ID optional for disks
