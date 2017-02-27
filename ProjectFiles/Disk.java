@@ -4,7 +4,7 @@ package binpacking;
  *
  * @author Ian
  */
-public class Disk implements Comparable<Disk>
+public class Disk implements Comparable<Disk> //May be "extends" vs implements
 {
     int totalStorage;
     int usedStorage;
