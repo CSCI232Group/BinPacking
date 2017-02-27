@@ -1,0 +1,15 @@
+how to run programs expecting standard inputActions for how to run programs expecting standard input	Feb 16, 2017 9:48 AM
+Here is a better approach to modify a program that uses standard input so that it reads directly from a file (if supplied as an argument).
+
+Add the following lines at the beginning of the main method:
+
+        // if supplied, this code uses args[0] as standard input
+        if (args.length > 0) {
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(new File(args[0]));
+            } catch (Exception ex) {
+                System.err.println(ex);
+            }
+            System.setIn(is);
+        }
