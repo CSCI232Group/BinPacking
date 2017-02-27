@@ -8,6 +8,7 @@ public class Disk implements Comparable<Disk>
 {
     int totalStorage;
     int usedStorage;
+    //int[] fileArray;
     
     public Disk()
     {
@@ -18,6 +19,14 @@ public class Disk implements Comparable<Disk>
     {
         if(totalStorage - usedStorage - size >= 0)
         {usedStorage += size;}
+        //add file into disk record - array???
+    }
+    public void printStorage()
+    {
+        //for(file f : fileArray)
+        //{
+            //print files
+        //}
     }
 
     @Override
