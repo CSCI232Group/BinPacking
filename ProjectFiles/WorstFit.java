@@ -5,23 +5,49 @@ package binpacking;
  * @author Ian
  */
 public class WorstFit
-{
-    //int[] dataArray;
-    //MaxPQ PQ;
+{       
+    private int[] dataArray;
+    private MaxPQ<Disk> maxPQ;
     
-    public static void main(String[] args)
-    {       
-        //Take input
-        
-        //Input into IntegerSorter.java --> Largest first
-
-        //Initialize Priority Queue for disks
-            //Make a PQ for ints as well??
-        
-        //Call sorting method
+    public WorstFit()
+    {                    
+        int[] tempArray = {300000, 400000, 100000, 199999};        
+        this.dataArray = tempArray;
     }
-    public void worstFitSort()
+    
+    public void worstFitSort(int[] array)
     {
+        Disk disk = new Disk();//Create first Disk
+        
+        maxPQ.insert(disk);//Add First Disk
+                
+        /* For all dataFiles we have, try to add to disk
+        */
+        for(int dataFile : array)
+        {
+            /*Try to add dataFile. If dataFile does not fit:
+            */
+            if(maxPQ.max().tryToFill(dataFile) == false)
+            {                
+                for(Disk d : maxPQ)//For every disk in maxPQ
+                {
+                    if(d == null)//If out of Disks in maxPQ
+                    {
+                        Disk newDisk = new Disk(); //Create new Disk
+                        newDisk.tryToFill(dataFile); //Put dataFile on new Disk
+                        
+                        maxPQ.insert(newDisk);//Insert new Disk into maxPQ
+                    }
+                    
+                    if(d.tryToFill(dataFile) == true)//Attempt to put dataFile onto disk d. If placed:
+                    break;
+                }
+            }
+        }
+        
+        disk.printStorage();        
+               
+        
         /* Create initial Disk
          * Place Disk into PQ
          * Place data in disk
@@ -35,5 +61,20 @@ public class WorstFit
          * //Then we dont need an IntegerSorter.java and can remove an int from the intPQ
          * //when it has been placed
          */
+    }
+    public static void main(String[] args)
+    {               
+        WorstFit wf = new WorstFit();
+        wf.worstFitSort(wf.dataArray);
+        
+        
+        //Take input
+        
+        //Input into IntegerSorter.java --> Largest first
+
+        //Initialize Priority Queue for disks
+            //Make a PQ for ints as well??
+        
+        //Call sorting method
     }
 }
