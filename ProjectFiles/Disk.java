@@ -4,7 +4,7 @@ package binpacking;
  *
  * @author Ian
  */
-public class Disk implements Comparable<Disk> //????May be "extends" vs implements????
+public class Disk implements Comparable<Disk>  //????May be "extends" vs implements????
 {
     int totalStorage;
     int usedStorage;
@@ -17,23 +17,25 @@ public class Disk implements Comparable<Disk> //????May be "extends" vs implemen
         usedStorage = 0;
         firstFile = null;        
     }
-    public void fill(int dataFile)
+    public boolean tryToFill(int dataFile)
     {
         if(usedStorage + dataFile <= totalStorage)
         {
             usedStorage += dataFile;//add dataFile to used space
         
             if(firstFile == null)//If this is the first dataFile
-            {
+            {                
                 firstFile = new Node(dataFile, null); //Creates first Node
                 currentFile = firstFile; //Sets currentFile to first and only Node
             }
             else
-            {
-               currentFile.next = new Node(dataFile, null); //Set next
-               currentFile = currentFile.next; //Move up currentFile
+            {                
+                currentFile.next = new Node(dataFile, null); //Set next                
+                currentFile = currentFile.next; //Move up currentFile
             }
+            return true;
         }
+        return false;
     }
     public void printStorage()
     {
