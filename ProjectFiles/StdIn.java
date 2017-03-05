@@ -7,9 +7,7 @@ package binpacking;
  *  Reads in data of various types from standard input.
  *
  ******************************************************************************/
-
-package edu.princeton.cs.algs4;
-
+import edu.princeton.cs.algs4.StdOut;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Locale;

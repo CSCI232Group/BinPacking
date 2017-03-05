@@ -17,16 +17,13 @@ public class WorstFit
     
     public void worstFitSort(int[] array)
     {
-        Disk disk = new Disk();//Create first Disk
-        
+        Disk disk = new Disk();//Create first Disk        
         maxPQ.insert(disk);//Add First Disk
                 
-        /* For all dataFiles we have, try to add to disk
-        */
+        /* For all dataFiles we have, try to add to disk */
         for(int dataFile : array)
         {
-            /*Try to add dataFile. If dataFile does not fit:
-            */
+            /* Try to add dataFile. If dataFile does not fit: */
             if(maxPQ.max().tryToFill(dataFile) == false)
             {                
                 for(Disk d : maxPQ)//For every disk in maxPQ
@@ -63,7 +60,7 @@ public class WorstFit
          */
     }
     public static void main(String[] args)
-    {               
+    {                    
         WorstFit wf = new WorstFit();
         wf.worstFitSort(wf.dataArray);
         
