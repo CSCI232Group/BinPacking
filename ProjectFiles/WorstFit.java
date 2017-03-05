@@ -63,19 +63,37 @@ public class WorstFit
          * //when it has been placed
          */
     }
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {                    
-        WorstFit wf = new WorstFit();
-        wf.worstFitSort(wf.dataArray);
+       //WorstFit wf = new WorstFit();
+       // wf.worstFitSort(wf.dataArray);
+        ArrayList<Integer> input=new ArrayList<Integer>();
+        if (args.length > 0) {
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(new File(args[0]));
+            } catch (Exception ex) {
+                System.err.println(ex);
+            }
+            System.setIn(is);
+        
+            Scanner scan=new Scanner(is);
+            while(scan.hasNext()){
+            input.add(scan.nextInt());
+            }
+            double[] list=new double[input.size()];
+            for (int i=0;i<input.size();i++){
+            	list[i]=(double)input.get(i)/1000000;
+            }
+            IntegerSorter sort=new IntegerSorter();
+            list=sort.qsort(list, 0, input.size()-1);
+            for (int i=0;i<input.size();i++){
+            	System.out.println(list[i]);
+            }
+            
+           
+        }
         
         
-        //Take input
-        
-        //Input into IntegerSorter.java --> Largest first
-
-        //Initialize Priority Queue for disks
-            //Make a PQ for ints as well??
-        
-        //Call sorting method
     }
 }
