@@ -1,5 +1,7 @@
 package binpacking;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Ian
@@ -16,9 +18,10 @@ public class WorstFit
     }
     
     public void worstFitSort(int[] array)
-    {
-        Disk disk = new Disk();//Create first Disk        
-        maxPQ.insert(disk);//Add First Disk
+    {        
+        maxPQ = new MaxPQ<Disk>();//Initialize maxPQ
+        
+        maxPQ.insert(new Disk());//Add First Disk
                 
         /* For all dataFiles we have, try to add to disk */
         for(int dataFile : array)
@@ -26,9 +29,10 @@ public class WorstFit
             /* Try to add dataFile. If dataFile does not fit: */
             if(maxPQ.max().tryToFill(dataFile) == false)
             {                
-                for(Disk d : maxPQ)//For every disk in maxPQ
+                Iterator heapIter = maxPQ.iterator();
+                //For every disk in maxPQ
                 {
-                    if(d == null)//If out of Disks in maxPQ
+                    if(maxPQ[d] == null)//If out of Disks in maxPQ
                     {
                         Disk newDisk = new Disk(); //Create new Disk
                         newDisk.tryToFill(dataFile); //Put dataFile on new Disk
@@ -42,7 +46,7 @@ public class WorstFit
             }
         }
         
-        disk.printStorage();        
+        //disk.printStorage();        
                
         
         /* Create initial Disk
