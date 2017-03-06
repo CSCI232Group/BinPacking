@@ -95,7 +95,7 @@ public class WorstFit
             }
             wf.data=list;
            wf.size=input.size();
-           System.out.println("file sizes sum = "+total+" GB");
+           System.out.println("file sizes sum = "+total/1000000+" GB");
            wf.print();
            
         }
