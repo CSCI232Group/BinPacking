@@ -5,7 +5,7 @@ public class IntegerSorter
 	public IntegerSorter(){
 		
 	}
- public double[] qsort(double[] a, int si, int ei){
+ public double[] qsort(double[] a, int si, int ei){//take in parameters for an array, first index, and last index
     //base case
     if(ei<=si || si>=ei){}
 
@@ -15,7 +15,7 @@ public class IntegerSorter
         double tmp; 
 
         //partition array 
-        for(int j = si+1; j<= ei; j++){
+        for(int j = si+1; j<= ei; j++){//create partition
             if(pivot < a[j]){
                 tmp = a[j]; 
                 a[j] = a[i]; 
