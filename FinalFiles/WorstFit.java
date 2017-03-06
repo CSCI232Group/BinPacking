@@ -8,25 +8,27 @@ import java.util.Scanner;
 
 /**
  *
- * @author Ian
+ * @author Ian Hecker, Michael Hewitt, Jake Yakowich
+ * CSCI 232
+ * LAB 2
  */
-public class WorstFit
+public class WorstFit 
 {   
     private int d=0;
     private double[] data;
     private int size;
-    private ArrayList<Disk> disks=new ArrayList<Disk>();
+    private ArrayList<Disk> disks=new ArrayList<Disk>();//arraylist of disks
     
     public WorstFit()
     {                    
     	
-    	disks.add(new Disk());
+    	disks.add(new Disk());//initialize disks and add first disk
     	disks.get(d).setID(d);
        
     }
     
     public void worstFitSort(double a)
-    {        
+    {        //adding next file to the next available disk
     	if(!disks.get(d).tryToFill(a)){
     		d++;
     		disks.add(new Disk());
@@ -35,7 +37,7 @@ public class WorstFit
     	}
         
     }
-    public void print(){
+    public void print(){//printing disks in correct order
     	System.out.println("total disks = "+disks.size());
     	    while(disks.size()>0){
     		Disk greatest=disks.get(0);
@@ -47,7 +49,7 @@ public class WorstFit
     		System.out.print(greatest.getID());
     		double t=(double)greatest.storage()/1000000.0;
     		int space=0;
-    		while(t<1){
+    		while(t<1){//printing the correct number of spaces for the length of int
     			t=t*10;
     			space++;
     		}
@@ -58,7 +60,7 @@ public class WorstFit
     		greatest.printStorage();
     		for(int k=0;k<disks.size(); k++){
     			if(greatest.getID()==disks.get(k).getID()){
-    				disks.remove(k);
+    				disks.remove(k);//remove the greatest storage space disk from list after printing it
     			}
     		}
     		disks.trimToSize();
@@ -79,7 +81,7 @@ public class WorstFit
             System.setIn(is);
         
             Scanner scan=new Scanner(is);
-            while(scan.hasNext()){
+            while(scan.hasNext()){//reading in values from text file
             input.add(scan.nextInt());
             }
             double[] list=new double[input.size()];
