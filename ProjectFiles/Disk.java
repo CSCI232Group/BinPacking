@@ -10,18 +10,18 @@ public class Disk implements Comparable<Disk>  //????May be "extends" vs impleme
     private double freeStorage;
     private Node firstFile;
     private Node currentFile;
-    private static int ID = 0;
+    private int ID = 0;
     
     public Disk()
     {        
-        ID++; //Enumerates Disks as they are created; Int ID's from 0 up
+        setID(getID() + 1); //Enumerates Disks as they are created; Int ID's from 0 up
         totalStorage = 1.0;//Total storage in Disk. Must convert ints accordingly!!!
         freeStorage = totalStorage;
         firstFile = null;
     }
-    public boolean tryToFill(int dataInt)//Need to convert int to double
+    public boolean tryToFill(double dataInt)//Need to convert int to double
     {
-        double dataFile = convertToInt(dataInt);//Conversion of int to double
+        double dataFile = dataInt;//Conversion of int to double
         
         if(freeStorage - dataFile >= 0)
         {
@@ -45,17 +45,31 @@ public class Disk implements Comparable<Disk>  //????May be "extends" vs impleme
     {
         return (double)dataFile / 1000000;
     }
-    public void printStorage()
-    {
-        Node iter = firstFile;
-        
+    public int storage(){
+    	Node iter = firstFile;
+    	int total=0;
         while(iter != null)
         {
-            System.out.printf("%d\n", iter.file);
+        	
+            total=total+((int)(iter.file*1000000));
             
             //Move iter Node up. If next == null, iter will become null
             iter = iter.next;
         }
+        return 1000000-total;
+    }
+    public void printStorage()
+    {
+        Node iter = firstFile;
+        while(iter != null)
+        {
+        	
+            System.out.print((int)(iter.file*1000000)+", ");
+            
+            //Move iter Node up. If next == null, iter will become null
+            iter = iter.next;
+        }
+        System.out.println();
     }
     class Node
     {
@@ -73,5 +87,11 @@ public class Disk implements Comparable<Disk>  //????May be "extends" vs impleme
     {
         return Double.compare(this.freeStorage, that.freeStorage);
     }
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
 
 }
