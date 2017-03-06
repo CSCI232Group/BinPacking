@@ -1,5 +1,10 @@
 package binpacking;                                                 //Project folder we are working on
                                                                     //We did get help from others to get this class working
+
+/*
+* By: Ian Hecker, Micheal Hewitt, Jake Yakawich
+*/
+
 import edu.princeton.cs.algs4.RedBlackBST;                          //Directories where we are getting information from for later on in the Project
 import edu.princeton.cs.algs4.StdIn;
 
@@ -21,7 +26,7 @@ public class BestFitDecreasing extends RedBlackBST {                //Class Best
         System.out.println("Files sizes sum = " + fileSum/1000000.0 + " GB");   //Prints out the File size 
         System.out.println("Total Disks     = " + numDisks);                    //Prints our the number of Disks
         
-        if(numDisks <= 100){                                                    //
+        if(numDisks <= 100){                                                    
             while(!disks.isEmpty()) {
                 Disk printing = (Disk) disks.max();
                 printing.print();
@@ -54,7 +59,7 @@ public class BestFitDecreasing extends RedBlackBST {                //Class Best
     }
     
     public static RedBlackBST rebalance(RedBlackBST tree, Disk skip, Disk replace) {
-        RedBlackBST temp = new RedBlackBST();                                           
+        RedBlackBST temp = new RedBlackBST();                                         //This is checking your space remaining on the disks 
         while(!tree.isEmpty()) {
             if(tree.max() != skip) {
                 Disk D = (Disk) tree.max();
@@ -64,6 +69,6 @@ public class BestFitDecreasing extends RedBlackBST {                //Class Best
             }
             tree.deleteMax();
         }
-        return temp;
+        return temp;                                                                 // returns
     }
 }
