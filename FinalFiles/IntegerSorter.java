@@ -1,5 +1,7 @@
 package binpacking;
-
+// Authors Ian Hecker, Michael Hewitt, Jake Yakowich
+// CSCI 232
+// LAB 2
 public class IntegerSorter
 {
 	public IntegerSorter(){
