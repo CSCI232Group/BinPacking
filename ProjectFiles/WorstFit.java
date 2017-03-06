@@ -1,73 +1,76 @@
 package binpacking;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  *
  * @author Ian
  */
 public class WorstFit
-{       
-    private int[] dataArray;
-    private MaxPQ<Disk> maxPQ;
+{   
+	private int d=0;
+    private double[] data;
+    private int size;
+    private ArrayList<Disk> disks=new ArrayList<Disk>();
     
     public WorstFit()
     {                    
-        int[] tempArray = {300000, 400000, 100000, 199999};        
-        this.dataArray = tempArray;
+    	
+    	disks.add(new Disk());
+    	disks.get(d).setID(d);
+       
     }
     
-    public void worstFitSort(int[] array)
+    public void worstFitSort(double a)
     {        
-        maxPQ = new MaxPQ<Disk>();//Initialize maxPQ
+    	if(!disks.get(d).tryToFill(a)){
+    		d++;
+    		disks.add(new Disk());
+    		disks.get(d).tryToFill(a);
+    		disks.get(d).setID(d);
+    	}
         
-        maxPQ.insert(new Disk());//Add First Disk
-                
-        /* For all dataFiles we have, try to add to disk */
-        for(int dataFile : array)
-        {
-            /* Try to add dataFile. If dataFile does not fit: */
-            if(maxPQ.max().tryToFill(dataFile) == false)
-            {                
-                Iterator heapIter = maxPQ.iterator();
-                //For every disk in maxPQ
-                {
-                    if(maxPQ[d] == null)//If out of Disks in maxPQ
-                    {
-                        Disk newDisk = new Disk(); //Create new Disk
-                        newDisk.tryToFill(dataFile); //Put dataFile on new Disk
-                        
-                        maxPQ.insert(newDisk);//Insert new Disk into maxPQ
-                    }
-                    
-                    if(d.tryToFill(dataFile) == true)//Attempt to put dataFile onto disk d. If placed:
-                    break;
-                }
-            }
-        }
-        
-        //disk.printStorage();        
-               
-        
-        /* Create initial Disk
-         * Place Disk into PQ
-         * Place data in disk
-         * 
-         * IF (next dataFile fits onto Disk)  {add}
-         * ELSE IF (dataFile fits on any other Disk in PQ)  {add}
-         * ELSE {create new disk, add dataFile onto Disk_2}
-         * End loop once dataFile inputs have all been placed
-         * 
-         * //Maybe we can put integers into a Priortiy Queue as well? 
-         * //Then we dont need an IntegerSorter.java and can remove an int from the intPQ
-         * //when it has been placed
-         */
+
+    }
+    public void print(){
+    	System.out.println("total disks = "+disks.size());
+    	    while(disks.size()>0){
+    		Disk greatest=disks.get(0);
+    		for(int i=0;i<disks.size();i++){
+    			if(greatest.storage()<disks.get(i).storage()){
+    				greatest=disks.get(i);
+    			}
+    		}
+    		System.out.print(greatest.getID());
+    		double t=(double)greatest.storage()/1000000.0;
+    		int space=0;
+    		while(t<1){
+    			t=t*10;
+    			space++;
+    		}
+    		for(int j=0;j<space;j++){
+    			System.out.print(" ");
+    		}
+    		System.out.print(greatest.storage()+": ");
+    		greatest.printStorage();
+    		for(int k=0;k<disks.size(); k++){
+    			if(greatest.getID()==disks.get(k).getID()){
+    				disks.remove(k);
+    			}
+    		}
+    		disks.trimToSize();
+    	}
     }
     public static void main(String[] args) throws IOException
     {                    
-       //WorstFit wf = new WorstFit();
-       // wf.worstFitSort(wf.dataArray);
+       WorstFit wf = new WorstFit();
         ArrayList<Integer> input=new ArrayList<Integer>();
+        int total=0;
         if (args.length > 0) {
             FileInputStream is = null;
             try {
@@ -83,14 +86,17 @@ public class WorstFit
             }
             double[] list=new double[input.size()];
             for (int i=0;i<input.size();i++){
+            	total=total+input.get(i);
             	list[i]=(double)input.get(i)/1000000;
             }
-            IntegerSorter sort=new IntegerSorter();
-            list=sort.qsort(list, 0, input.size()-1);
-            for (int i=0;i<input.size();i++){
-            	System.out.println(list[i]);
-            }
             
+            for (int i=0;i<input.size();i++){
+            	wf.worstFitSort(list[i]);
+            }
+            wf.data=list;
+           wf.size=input.size();
+           System.out.println("file sizes sum = "+total+" GB");
+           wf.print();
            
         }
         
